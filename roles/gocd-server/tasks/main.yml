@@ -15,8 +15,8 @@
 
 - name: Install Go Server
   yum:
-    name: go-server
-    state: latest
+    name: go-server-18.5.0
+    state: present
     disable_gpg_check: yes
   when: ansible_pkg_mgr == 'yum'
 

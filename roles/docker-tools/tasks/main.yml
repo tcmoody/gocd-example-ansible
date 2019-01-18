@@ -4,6 +4,7 @@
   get_url:
     url: https://github.com/hadolint/hadolint/releases/download/v1.15.0/hadolint-Linux-x86_64
     dest: /tmp/hadolint
+    mode: 1777
 
 - name: Install Docker
   yum: name=docker state=latest
