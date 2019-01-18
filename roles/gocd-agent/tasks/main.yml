@@ -1,0 +1,45 @@
+---
+
+- name: Install java1.8
+  yum:
+    name: java-1.8.0-openjdk
+    state: latest
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Download GoCD-Agent
+  yum_repository:
+    name: GoCD
+    description: GoCD YUM repo
+    baseurl: 'https://download.gocd.io'
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Install Go Agent
+  yum:
+    name: go-agent
+    state: latest
+    disable_gpg_check: yes
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Add auto register properties file
+  template:
+    src: autoregister.properties
+    dest: /var/lib/go-agent/config/autoregister.properties
+  notify: restart agent
+
+- name: install git
+  package: name=git state=latest
+
+- name: Set up agent defaults
+  template:
+    src: go-agent-defaults
+    dest: /etc/default/go-agent
+    mode: 0644
+    owner: go
+    group: go
+  notify: restart agent
+
+- name: Configure go-agent service
+  service:
+    name: go-agent
+    enabled: yes
+    state: started

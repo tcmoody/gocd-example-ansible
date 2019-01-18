@@ -1,0 +1,27 @@
+---
+
+- name: Install java1.8
+  yum:
+    name: java-1.8.0-openjdk
+    state: latest
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Download GoCD-Server
+  yum_repository:
+    name: GoCD
+    description: GoCD YUM repo
+    baseurl: 'https://download.gocd.io'
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Install Go Server
+  yum:
+    name: go-server
+    state: latest
+    disable_gpg_check: yes
+  when: ansible_pkg_mgr == 'yum'
+
+- name: Configure go-server service
+  service:
+    name: go-server
+    enabled: yes
+    state: started

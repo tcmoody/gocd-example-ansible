@@ -1,0 +1,14 @@
+---
+- name: Create Go group
+  group:
+    name: go
+    gid: 5001
+
+- name: Create Go user
+  user:
+    name: go
+    group: go
+    home: /var/go
+    uid: 5001
+    shell: '/bin/bash'
+  ignore_errors: yes

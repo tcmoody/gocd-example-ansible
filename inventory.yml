@@ -1,0 +1,9 @@
+tag_Name_gocd_agent:
+  bastion_host: tag_Name_gocd_example_bastion
+  bastion_key: provisionkey.gocd-example
+  target_key: provisionkey.gocd-example
+
+tag_Name_gocd_server:
+  bastion_host: tag_Name_gocd_example_bastion
+  bastion_key: provisionkey.gocd-example
+  target_key: provisionkey.gocd-example

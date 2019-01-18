@@ -1,0 +1,9 @@
+---
+- hosts: tag_Name_gocd_server
+  roles:
+    - gocd-common
+    - gocd-server
+  become: yes
+  any_errors_fatal: true
+  vars:
+    - GO_USER_HOME: /var/go
