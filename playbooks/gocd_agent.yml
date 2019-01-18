@@ -3,5 +3,6 @@
   roles:
     - gocd-common
     - gocd-agent
+    - docker-tools
   become: yes
   any_errors_fatal: true

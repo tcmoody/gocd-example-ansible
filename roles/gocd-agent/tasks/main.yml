@@ -26,9 +26,6 @@
     dest: /var/lib/go-agent/config/autoregister.properties
   notify: restart agent
 
-- name: install git
-  package: name=git state=latest
-
 - name: Set up agent defaults
   template:
     src: go-agent-defaults

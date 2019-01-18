@@ -12,3 +12,21 @@
     uid: 5001
     shell: '/bin/bash'
   ignore_errors: yes
+
+- name: Create .ssh directory
+  file:
+    path: /var/go/.ssh
+    state: directory
+    owner: go
+    group: go
+
+- name: Copy github key
+  template:
+    src: github_temp_key
+    dest: /var/go/.ssh/id_rsa
+    mode: 0600
+    owner: go
+    group: go
+
+- name: install git
+  package: name=git state=latest

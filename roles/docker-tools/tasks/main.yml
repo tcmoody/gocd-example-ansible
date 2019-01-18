@@ -1,0 +1,25 @@
+---
+
+- name: Install hadolint
+  get_url:
+    url: https://github.com/hadolint/hadolint/releases/download/v1.15.0/hadolint-Linux-x86_64
+    dest: /tmp/hadolint
+
+- name: Install Docker
+  yum: name=docker state=latest
+
+- name: Make sure Docker is running
+  service: name=docker state=started
+
+- group:
+    name: docker
+    state: present
+
+- user: name=go groups=docker append=yes
+
+- name: Allow 'go' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%go'
+    line: '%go ALL=(ALL) NOPASSWD: ALL'
